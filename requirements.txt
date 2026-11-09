@@ -1,0 +1,22 @@
+python-telegram-bot>=21.0
+# Версия langchain зафиксирована жёстче: в 1.x EnsembleRetriever переехал
+# в langchain_classic — main.py поддерживает оба варианта импорта, но
+# закрепление версии снижает риск неожиданных breaking changes при апдейте.
+langchain>=0.2.0,<2.0.0
+langchain-classic; python_version>='3.9'
+langchain-community>=0.2.0
+langchain-chroma
+langchain-text-splitters
+rank_bm25
+# torch/transformers обычно уже тянутся через vllm — здесь как явная
+# зависимость, т.к. используются напрямую в E5Embeddings (main.py)
+torch
+transformers
+vllm
+triton
+pypdf
+python-dotenv
+
+# dev / тесты
+pytest
+fpdf2

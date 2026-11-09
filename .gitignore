@@ -1,0 +1,33 @@
+# Секреты
+.env
+
+# Логи
+logs_out.jsonl
+*.log
+*.jsonl
+
+# Материалы курса и загруженные PDF
+MATERIALS/
+
+# Персистентная векторная база
+chroma_db/
+chroma_db_test/
+/tmp/_torchaudio_stub/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+.pytest_cache/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store

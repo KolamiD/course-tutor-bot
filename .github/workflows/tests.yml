@@ -1,0 +1,32 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install lightweight deps (без GPU-зависимого vLLM/torch)
+        run: |
+          pip install pytest python-dotenv fpdf2 \
+                      "langchain>=0.2.0,<2.0.0" langchain-classic \
+                      langchain-community langchain-chroma \
+                      langchain-text-splitters langchain-core \
+                      rank_bm25 chromadb pypdf
+
+      - name: Проверка синтаксиса
+        run: python -m py_compile main.py
+
+      - name: Юнит-тесты (не требующие GPU/LLM)
+        run: pytest tests/test_basic.py -v
+
+      - name: Проверка пайплайна на фейковых LLM/embeddings (без GPU)
+        run: python tests/verify_pipeline_no_gpu.py
